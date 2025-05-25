@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Community Portal</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        .gallery-img { width: 100%; height: 120px; object-fit: cover; }
+        .slider-img { width: 100%; height: 320px; object-fit: cover; }
+        .event-card-img { width: 100%; height: 120px; object-fit: cover; }
+        .modal-lg { max-width: 500px; }
+    </style>
+</head>
+<body class="bg-light">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">City Portal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="#feedback">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Add Event Button -->
+<div class="container my-4 d-flex justify-content-end">
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEventModal"><i class="bi bi-plus-circle"></i> Add Event</button>
+</div>
+
+<!-- Add Event Modal -->
+<div class="modal fade" id="addEventModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Event</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="addEventForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Event Name</label>
+            <input type="text" class="form-control" id="newEventName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" id="newEventDate" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" id="newEventCategory" required>
+              <option value="">Select Category</option>
+              <option value="music">Music</option>
+              <option value="workshop">Workshop</option>
+              <option value="sports">Sports</option>
+              <option value="cultural">Cultural</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Seats</label>
+            <input type="number" class="form-control" id="newEventSeats" min="1" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Image URL</label>
+            <input type="url" class="form-control" id="newEventImg" placeholder="https://...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Add Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Image Slider for Upcoming Events -->
+<div id="eventSlider" class="carousel slide container mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner rounded shadow">
+    <div class="carousel-item active">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" class="slider-img d-block w-100" alt="Music Night">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Music Night</h5>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal" data-event="Music Night">Register Now</button>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" class="slider-img d-block w-100" alt="Art Expo">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Art Expo</h5>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal" data-event="Art Expo">Register Now</button>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80" class="slider-img d-block w-100" alt="Food Festival">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Food Festival</h5>
+        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal" data-event="Food Festival">Register Now</button>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#eventSlider" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#eventSlider" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- Registration Modal (used for both slider and event list) -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Event Registration</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="registerForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" id="regName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Event</label>
+            <input type="text" class="form-control" id="regEvent" readonly>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Image Gallery Table -->
+<section class="container mb-5" id="gallery">
+  <h2 class="mb-4 text-center">Memorable Events Gallery</h2>
+  <table class="table table-bordered bg-white shadow">
+    <thead class="table-primary">
+      <tr>
+        <th>Event</th>
+        <th>Image</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pongal Celebration</td>
+        <td><img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" class="gallery-img rounded"></td>
+        <td>Harvest festival with traditional games and food.</td>
+      </tr>
+      <tr>
+        <td>Diwali Night</td>
+        <td><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="gallery-img rounded"></td>
+        <td>Festival of lights with fireworks and sweets.</td>
+      </tr>
+      <tr>
+        <td>Colony Day</td>
+        <td><img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" class="gallery-img rounded"></td>
+        <td>Annual community gathering and fun activities.</td>
+      </tr>
+      <tr>
+        <td>New Year Bash</td>
+        <td><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80" class="gallery-img rounded"></td>
+        <td>Welcoming the new year with music and dance.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Event List with Search/Filter and Register Button -->
+<section class="container mb-5" id="events">
+  <div class="d-flex flex-wrap gap-2 mb-3 align-items-center">
+    <input type="text" class="form-control w-auto" id="searchEvent" placeholder="Search events...">
+    <select class="form-select w-auto" id="filterCategory">
+      <option value="all">All Categories</option>
+      <option value="music">Music</option>
+      <option value="workshop">Workshop</option>
+      <option value="sports">Sports</option>
+      <option value="cultural">Cultural</option>
+    </select>
+  </div>
+  <div class="row" id="eventList">
+    <!-- Event cards will be rendered here by JS -->
+  </div>
+</section>
+
+<!-- Feedback Section -->
+<section class="container mb-5" id="feedback">
+  <h2 class="mb-4 text-center">Event Feedback</h2>
+  <form class="row g-3 justify-content-center" id="feedbackForm">
+    <div class="col-md-6">
+      <input type="text" class="form-control" id="feedbackName" placeholder="Your Name" required>
+    </div>
+    <div class="col-md-6">
+      <input type="email" class="form-control" id="feedbackEmail" placeholder="Your Email" required>
+    </div>
+    <div class="col-12">
+      <select class="form-select" id="feedbackEvent" required>
+        <option value="">Select Event</option>
+        <option>Music Night</option>
+        <option>Art Expo</option>
+        <option>Food Festival</option>
+        <option>Pongal Celebration</option>
+        <option>Diwali Night</option>
+        <option>Colony Day</option>
+        <option>New Year Bash</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <textarea class="form-control" id="feedbackMsg" rows="3" placeholder="Your Feedback" required></textarea>
+    </div>
+    <div class="col-12 text-center">
+      <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </div>
+  </form>
+</section>
+
+
+
+<script>
+// Demo event data
+let events = [
+  { name: "Music Night", date: "2025-06-10", category: "music", seats: 10, img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" },
+  { name: "Art Expo", date: "2025-07-01", category: "cultural", seats: 5, img: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" },
+  { name: "Food Festival", date: "2025-08-15", category: "cultural", seats: 20, img: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80" },
+  { name: "Workshop on Baking", date: "2025-09-10", category: "workshop", seats: 15, img: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" }
+];
+
+// Render event cards
+function renderEventList() {
+  const list = document.getElementById('eventList');
+  const search = document.getElementById('searchEvent').value.toLowerCase();
+  const filter = document.getElementById('filterCategory').value;
+  list.innerHTML = '';
+  let filtered = events.filter(ev =>
+    (filter === 'all' || ev.category === filter) &&
+    (ev.name.toLowerCase().includes(search))
+  );
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="col-12"><div class="alert alert-warning">No events found.</div></div>';
+    return;
+  }
+  filtered.forEach(ev => {
+    const col = document.createElement('div');
+    col.className = 'col-12 col-md-6 col-lg-4 mb-4';
+    col.innerHTML = `
+      <div class="card h-100 shadow">
+        <img src="${ev.img}" class="event-card-img card-img-top" alt="${ev.name}">
+        <div class="card-body">
+          <h5 class="card-title">${ev.name}</h5>
+          <p class="card-text mb-1"><i class="bi bi-calendar-event"></i> ${ev.date}</p>
+          <p class="card-text mb-1"><span class="badge bg-info text-dark text-capitalize">${ev.category}</span></p>
+          <p class="card-text">Seats: <span class="fw-bold">${ev.seats}</span></p>
+          <button class="btn btn-outline-primary w-100 register-btn" data-bs-toggle="modal" data-bs-target="#registerModal" data-event="${ev.name}">Register Now</button>
+        </div>
+      </div>
+    `;
+    list.appendChild(col);
+  });
+}
+
+document.getElementById('searchEvent').addEventListener('input', renderEventList);
+document.getElementById('filterCategory').addEventListener('change', renderEventList);
+
+// Register Now button (from event list or slider)
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('register-btn')) {
+    const eventName = e.target.getAttribute('data-event');
+    document.getElementById('regEvent').value = eventName;
+  }
+});
+
+document.getElementById('addEventForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('newEventName').value.trim();
+  const date = document.getElementById('newEventDate').value;
+  const category = document.getElementById('newEventCategory').value;
+  const seats = parseInt(document.getElementById('newEventSeats').value, 10);
+  const img = document.getElementById('newEventImg').value || 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80';
+  if (!name || !date || !category || isNaN(seats) || seats < 1) {
+    alert('Please fill out all fields correctly.');
+    return;
+  }
+  events.push({ name, date, category, seats, img });
+  renderEventList();
+  e.target.reset();
+  var modal = bootstrap.Modal.getInstance(document.getElementById('addEventModal'));
+  modal.hide();
+});
+
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const eventName = document.getElementById('regEvent').value;
+  const eventObj = events.find(ev => ev.name === eventName);
+  if (eventObj && eventObj.seats > 0) {
+    eventObj.seats--;
+    alert('Registration successful!');
+    renderEventList();
+  } else {
+    alert('Sorry, this event is full or not found.');
+  }
+  e.target.reset();
+  var modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+  modal.hide();
+});
+
+// Feedback form
+
+document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Thank you for your feedback!');
+  e.target.reset();
+});
+
+// Initial render
+renderEventList();
+</script>
+</html>
