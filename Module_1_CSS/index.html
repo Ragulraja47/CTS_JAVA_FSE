@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+      <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(196, 217, 245);
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- navigation bar to naviagate through the website -->
+    <nav id="navbar">
+        <a class="nav-item" href="index.html">Home</a>
+        <a class="nav-item" href="Event.html">Event</a>
+        <a class="nav-item" href="Contact.html">Contact</a>
+        <a class="nav-item" href="help.html" target="_blank">help</a>
+        <a class="nav-item logout" href="login.html">Log-Out</a>
+    </nav>
+
+    <header>
+        <div id="mainHeader">
+            <span style="color: red;"> Welcome to our Community Portal!</span> <br>
+            <span style="color:rgba(0, 0, 0, 0.634); font-weight:bold">Special Offer: 50% Off Registration</span>
+
+        </div>
+    </header> <br>
+
+    <!-- contain the main content of the page -->
+    <main>
+
+        <div class="eventCard" name="eventContainer">
+            <section id="upcommingEvent">
+                <center>
+                    <h2>Upcomming Events</h2>
+                </center>
+                <div class="slider-container">
+                    <div class="slide active">
+                        <img src="upcomingevent1.jpg" alt="Upcoming Event 1">
+                        <div class="slide-content">
+                            <h3>Community Workshop</h3>
+                            <a href="#" class="register-btn">Register Now</a>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="upcomingevent2.jpg" alt="Upcoming Event 2">
+                        <div class="slide-content">
+                            <h3>Tech Conference</h3>
+                            <a href="#" class="register-btn">Register Now</a>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="upcomingevent3.jpg" alt="Upcoming Event 3">
+                        <div class="slide-content">
+                            <h3>Networking Event</h3>
+                            <a href="#" class="register-btn">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="eventCard">
+            <section id="eventGallery">
+                <h2>Event Gallery</h2>
+                <table>
+                    <caption>Community Moments</caption>
+                    <tr>
+                        <td>
+                            <img src="eventimg1.jpg" alt="Pongal Celebration" title="Pongal Celebration"
+                                class="eventImage">
+                            <p class="event-caption">Pongal - Harvest Festival Celebrations</p>
+                        </td>
+                        <td>
+                            <img src="eventimg2.jpg" alt="Diwali Celebration" title="Diwali Celebration"
+                                class="eventImage">
+                            <p class="event-caption">Diwali - Festival of Lights</p>
+                        </td>
+                        <td>
+                            <img src="eventimg3.jpg" alt="Colony Day" title="Colony Day" class="eventImage">
+                            <p class="event-caption">Colony Day - Community Gathering</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="eventimg4.jpg" alt="New Year Celebration" title="New Year Celebration"
+                                class="eventImage">
+                            <p class="event-caption">New Year - Welcome 2025</p>
+                        </td>
+                        <td>
+                            <img src="eventimg5.jpg" alt="Holi Celebration" title="Holi Celebration" class="eventImage">
+                            <p class="event-caption">Holi - Festival of Colors</p>
+                        </td>
+                        <td>
+                            <img src="eventimg6.jpg" alt="Tamil New Year" title="Tamil New Year" class="eventImage">
+                            <p class="event-caption">Tamil New Year - Traditional Celebrations</p>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+
+        <div class="eventCard">
+            <section id="registration-form">
+                <h2 style="text-align: center;">Regitser for upcomming Events</h2>
+                <form onsubmit="handleEventForm()" id="eventForm">
+                    <label for="name">Enter Name:</label>
+                    <input type="text" id="name" name="name" class="form-item" required autofocus> <br>
+
+                    <label for="email">Enter Email:</label>
+                    <input type="email" id="email" name="email" class="form-item" required> <br>
+
+                    <label for="date">Enter Date:</label>
+                    <input type="date" id="date" name="date" class="form-item" required> <br>
+
+                    <label for="eventType">Event Type:</label>
+                    <select name="eventType" id="eventType" class="form-item">
+                        <option value="">Select Option</option>
+                        <option value="blooddonation">Blood Donation</option>
+                        <option value="yoga">Yoga</option>
+                        <option value="cultural">Cultural</option>
+                    </select> <br>
+
+                    <label for="message">Message:</label>
+                    <textarea name="message" id="message" class="form-item" required></textarea> <br>
+
+                    <input type="submit" value="Register" class="submit-btn">
+                </form>
+            </section>
+        </div>
+
+        <div class="eventCard">
+            <section id="Event-feedback">
+                <h2>Event Feedback</h2>
+                <form id="feedbackForm">
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" id="phone" name="phone" class="form-item" maxlength="10" onblur="validatePhone()"
+                        required>
+                    <span id="phoneError"></span> <br>
+
+                    <label for="eventSelect">Select Event:</label>
+                    <select id="eventSelect" name="eventSelect" class="form-item"
+                        onchange="showEventFee(); saveEventPreference();">
+                        <option value="">Choose an event</option>
+                        <option value="Pongal">Pongal</option>
+                        <option value="Diwali">Diwali</option>
+                        <option value="Colony Day">Colony Day</option>
+                        <option value="New Year">New Year</option>
+                        <option value="Holi">Holi</option>
+                        <option value="Tamil New Year">Tamil New Year</option>
+                    </select>
+                    <button type="button" class="submit-btn" onclick="clearPreferences()">Clear Preferences</button>
+                    <div id="eventFee"></div>
+
+                    <label for="feedbackImage">Event Image <em>(double-click to enlarge)</em>:</label><br>
+                    <img src="eventimg1.jpg" id="feedbackImage" alt="Event Feedback Image"
+                        title="Double-click to enlarge" ondblclick="enlargeImage()"><br><br>
+
+                    <label for="feedbackText">Your Feedback:</label>
+                    <textarea id="feedbackText" name="feedbackText" class="form-item" rows="3" onkeyup="countChars()"
+                        onkeydown="countChars()" maxlength="200"></textarea>
+                    <div class="feedback-char-counter">
+                        Characters: <span id="charCount">0</span>/200
+                    </div>
+
+                    <button type="button" class="submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+                </form>
+            </section>
+        </div>
+
+        <div class="eventCard">
+            <section id="video-invite">
+                <h2>Event Promo Video</h2>
+                <video id="promoVideo" controls oncanplay="showVideoReady()">
+                    <source src="eventpromo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div id="videoStatus"></div>
+            </section>
+        </div>
+
+        <div class="eventCard">
+            <section id="geolocation-section">
+                <h2>Find Nearby Events</h2>
+                <button class="submit-btn" onclick="findNearbyEvents()">Find Nearby Events</button>
+                <div id="geoResult"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- the end of page -->
+    <footer></footer>
+</body>
+
+<script>
+    // Js code for slider
+    let currentSlide = 0;
+
+    const slides = document.querySelectorAll('.slide');
+    console.log(slides);
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+</script>
+
+<script>
+    //handle form submission
+    function handleEventForm() {
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const date = document.getElementById("date").value;
+        const eventType = document.getElementById("eventType").value;
+        const message = document.getElementById("message").value;
+
+        var isvalid = true;
+
+        //validate form fields
+        if (!name.length > 2) {
+            alert("Please enter a valid name");
+            isvalid = false;
+        }
+
+        const emailpattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (!email.match(emailpattern)) {
+            alert("Please enter a valid email address");
+            isvalid = false;
+        }
+
+        if (!date) {
+            alert("Please select a date");
+            isvalid = false;
+        }
+
+        if (eventType === "") {
+            alert("Please select an event type");
+            isvalid = false;
+        }
+
+        if (!message || message.length < 10) {
+            alert("Please enter a valid message");
+            isvalid = false;
+        }
+
+        if (isvalid) {
+            alert("Registration successful!");
+
+            // Reset the form
+            document.querySelector('form').reset();
+        } else {
+            alert("Please fill out the form correctly.");
+        }
+    }
+</script>
+
+<script>
+    // Phone validation on blur
+    function validatePhone() {
+        const phone = document.getElementById('phone').value.trim();
+        const phoneError = document.getElementById('phoneError');
+        if (!/^\d{10}$/.test(phone)) {
+            phoneError.textContent = 'Enter a valid 10-digit phone number.';
+            return false;
+        } else {
+            phoneError.textContent = '';
+            return true;
+        }
+    }
+
+    // Show event fee on dropdown change
+    function showEventFee() {
+        const event = document.getElementById('eventSelect').value;
+        const feeMap = {
+            'Pongal': '₹100',
+            'Diwali': '₹150',
+            'Colony Day': '₹120',
+            'New Year': '₹200',
+            'Holi': '₹130',
+            'Tamil New Year': '₹110'
+        };
+        document.getElementById('eventFee').textContent = event ? `Fee: ${feeMap[event]}` : '';
+    }
+
+    // Enlarge image on double-click
+    let enlarged = false;
+    function enlargeImage() {
+        const img = document.getElementById('feedbackImage');
+        if (!enlarged) {
+            img.style.width = '300px';
+            img.style.height = '200px';
+            img.style.zIndex = 10;
+            img.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
+            enlarged = true;
+        } else {
+            img.style.width = '120px';
+            img.style.height = '80px';
+            img.style.zIndex = 1;
+            img.style.boxShadow = '';
+            enlarged = false;
+        }
+    }
+
+    // Character count in textarea
+    function countChars() {
+        const text = document.getElementById('feedbackText').value;
+        document.getElementById('charCount').textContent = text.length;
+    }
+
+    // Submit feedback with confirmation
+    function submitFeedback() {
+        if (!validatePhone()) return;
+        const event = document.getElementById('eventSelect').value;
+        if (!event) {
+            alert('Please select an event.');
+            return;
+        }
+        const feedback = document.getElementById('feedbackText').value.trim();
+        if (!feedback) {
+            alert('Please enter your feedback.');
+            return;
+        }
+        alert('Thank you for your feedback!');
+        document.getElementById('feedbackForm').reset();
+        document.getElementById('eventFee').textContent = '';
+        document.getElementById('charCount').textContent = '0';
+    }
+
+    // Video oncanplay event handler
+    function showVideoReady() {
+        document.getElementById('videoStatus').textContent = 'Video ready to play';
+    }
+
+    // onbeforeunload warning for unfinished forms
+    let formDirty = false;
+    // Mark form as dirty on any input change
+    document.addEventListener('DOMContentLoaded', function () {
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('input', () => { formDirty = true; });
+            form.addEventListener('submit', () => { formDirty = false; });
+        });
+    });
+    window.onbeforeunload = function (e) {
+        if (formDirty) {
+            const msg = 'You have unsaved changes. Are you sure you want to leave?';
+            e = e || window.event;
+            if (e) e.returnValue = msg;
+            return msg;
+        }
+    };
+
+    // Save event type in localStorage
+    function saveEventPreference() {
+        const eventType = document.getElementById('eventSelect').value;
+        localStorage.setItem('preferredEventType', eventType);
+    }
+
+    //Pre-select event type
+    window.addEventListener('DOMContentLoaded', function () {
+        const preferred = localStorage.getItem('preferredEventType');
+        if (preferred) {
+            const eventSelect = document.getElementById('eventSelect');
+            if (eventSelect) {
+                eventSelect.value = preferred;
+                showEventFee();
+            }
+        }
+    });
+
+    // Clear both localStorage and sessionStorage
+    function clearPreferences() {
+        localStorage.clear();
+        sessionStorage.clear();
+        alert('Preferences cleared!');
+        //Reset the event select
+        const eventSelect = document.getElementById('eventSelect');
+        if (eventSelect) {
+            eventSelect.value = '';
+            showEventFee();
+        }
+    }
+
+    function findNearbyEvents() {
+        const geoResult = document.getElementById('geoResult');
+        geoResult.textContent = 'Locating...';
+        if (!navigator.geolocation) {
+            geoResult.textContent = 'Geolocation is not supported by your browser.';
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                // Google Maps embed URL with marker at current location
+                const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
+                geoResult.innerHTML = `<iframe width='100%' height='300' frameborder='0' style='border:0' src='${mapUrl}' allowfullscreen></iframe>`;
+            },
+            function (error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        geoResult.textContent = 'Permission denied. Please allow location access.';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        geoResult.textContent = 'Location information is unavailable.';
+                        break;
+                    case error.TIMEOUT:
+                        geoResult.textContent = 'Location request timed out. Please try again.';
+                        break;
+                    default:
+                        geoResult.textContent = 'An unknown error occurred.';
+                }
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+    }
+</script>
+
+</html>
