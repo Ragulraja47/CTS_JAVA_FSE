@@ -315,3 +315,101 @@
 .eventCard:hover {
     box-shadow: 0 6px 24px rgba(0,0,0,0.16);
 }
+
+/* =============================
+   Responsive Design for Mobile
+   ============================= */
+@media (max-width: 768px) {
+    /* Stack navbar links vertically */
+    #navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.5rem 1rem;
+    }
+    .nav-item {
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
+    }
+    .logout {
+        margin-top: 0.5rem;
+    }
+
+    /* Responsive slider */
+    .slider-container {
+        max-width: 100vw;
+        height: 40vw;
+        min-height: 180px;
+    }
+    .slide img {
+        height: 40vw;
+        min-height: 180px;
+    }
+    .slide-content {
+        padding: 8vw 2vw;
+        font-size: 3vw;
+    }
+    .slide-content h3 {
+        font-size: 1.1rem;
+    }
+    .register-btn {
+        padding: 6px 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Event Gallery */
+    #eventGallery table {
+        display: block;
+        width: 100%;
+    }
+    #eventGallery tr {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #eventGallery td {
+        width: 100%;
+        padding: 8px 0;
+    }
+    .eventImage {
+        width: 90vw;
+        max-width: 100%;
+        height: 30vw;
+        min-height: 120px;
+        font-size: 0.95rem;
+    }
+    .event-caption {
+        font-size: 0.95rem;
+    }
+    #eventGallery h2, #registration-form h2, #Event-feedback h2, #video-invite h2, #geolocation-section h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Forms and Cards */
+    .eventCard, #feedbackForm, #registration-form, #video-invite, #geolocation-section {
+        max-width: 98vw;
+        padding: 2vw 2vw;
+        margin: 12px auto;
+    }
+    .form-item, textarea {
+        font-size: 0.95rem;
+        padding: 6px 8px;
+    }
+    .submit-btn {
+        font-size: 0.95rem;
+        padding: 8px 16px;
+    }
+    #promoVideo {
+        height: 32vw;
+        min-height: 120px;
+    }
+    #feedbackImage {
+        width: 40vw;
+        min-width: 80px;
+        height: 16vw;
+        min-height: 40px;
+    }
+    .feedback-char-counter {
+        font-size: 0.85rem;
+    }
+}
