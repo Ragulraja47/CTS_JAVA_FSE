@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Community Event Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    #welcomeBanner { background-color: #add8e6; padding: 1rem; text-align: center; }
+    .highlight { background-color: yellow; font-weight: bold; }
+    table, th, td { border: 1px solid black; border-collapse: collapse; }
+    td img { width: 100px; height: auto; }
+    .eventImage { border: 2px solid #333; padding: 5px; }
+    form { margin: 20px 0; }
+    video { width: 300px; display: block; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a> |
+    <a href="#events">Events</a> |
+    <a href="#contact">Contact</a> |
+    <a href="help.html" target="_blank">Help</a>
+  </nav>
+
+  <!-- Welcome Banner -->
+  <div id="welcomeBanner">
+    Welcome to our Community Portal!
+    <span style="color:red; font-weight:bold">Special Offer: 50% Off Registration</span>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Events Section -->
+    <section id="events">
+      <h2 class="highlight">Upcoming Events</h2>
+      <table>
+        <caption>Community Moments</caption>
+        <tr>
+          <td><img src="img1.jpg" alt="Event 1" title="Event 1" class="eventImage"></td>
+          <td><img src="img2.jpg" alt="Event 2" title="Event 2" class="eventImage"></td>
+          <td><img src="img3.jpg" alt="Event 3" title="Event 3" class="eventImage"></td>
+        </tr>
+        <tr>
+          <td><img src="img4.jpg" alt="Event 4" title="Event 4" class="eventImage"></td>
+          <td><img src="img5.jpg" alt="Event 5" title="Event 5" class="eventImage"></td>
+          <td><img src="img6.jpg" alt="Event 6" title="Event 6" class="eventImage"></td>
+        </tr>
+      </table>
+
+      <!-- Registration Form -->
+      <h3>Register for an Event</h3>
+      <form id="registrationForm" onsubmit="submitForm(event)">
+        <label>Name: <input type="text" name="name" placeholder="Your Name" required autofocus></label><br>
+        <label>Email: <input type="email" name="email" placeholder="example@mail.com" required></label><br>
+        <label>Date: <input type="date" name="date" required></label><br>
+        <label>Event Type:
+          <select name="eventType" id="eventType" onchange="savePreference()">
+            <option value="music">Music</option>
+            <option value="sports">Sports</option>
+            <option value="tech">Tech</option>
+          </select>
+        </label><br>
+        <label>Phone: <input type="tel" onblur="validatePhone(this)"></label><br>
+        <label>Message: <textarea id="feedback" onkeyup="countChars()"></textarea></label>
+        <p>Characters: <span id="charCount">0</span></p>
+        <input type="submit" value="Register" onclick="showConfirmation()">
+        <output id="formOutput"></output>
+      </form>
+
+      <!-- Feedback Image -->
+      <img src="event.jpg" alt="Event" ondblclick="enlargeImage(this)" style="width: 200px;">
+    </section>
+
+    <!-- Video Section -->
+    <section id="video">
+      <h3>Event Promo</h3>
+      <video controls oncanplay="videoReady()">
+        <source src="promo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p id="videoMessage"></p>
+    </section>
+
+    <!-- Geolocation -->
+    <section>
+      <h3>Find Nearby Events</h3>
+      <button onclick="findLocation()">Find Nearby Events</button>
+      <p id="locationResult"></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <button onclick="clearPrefs()">Clear Preferences</button>
+  </footer>
+
+  <script>
+    window.onload = () => {
+      const pref = localStorage.getItem("eventType");
+      if (pref) document.getElementById("eventType").value = pref;
+    };
+
+    function savePreference() {
+      const selected = document.getElementById("eventType").value;
+      localStorage.setItem("eventType", selected);
+    }
+
+    function clearPrefs() {
+      localStorage.clear();
+      sessionStorage.clear();
+      alert("Preferences cleared.");
+    }
+
+    function validatePhone(input) {
+      const regex = /^[0-9]{10}$/;
+      if (!regex.test(input.value)) alert("Enter a valid 10-digit phone number.");
+    }
+
+    function showConfirmation() {
+      document.getElementById("formOutput").innerText = "Form submitted! Thank you.";
+    }
+
+    function countChars() {
+      const count = document.getElementById("feedback").value.length;
+      document.getElementById("charCount").innerText = count;
+    }
+
+    function enlargeImage(img) {
+      img.style.width = "400px";
+    }
+
+    function videoReady() {
+      document.getElementById("videoMessage").innerText = "Video ready to play";
+    }
+
+    function findLocation() {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const coords = `Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.longitude}`;
+          document.getElementById("locationResult").innerText = coords;
+        },
+        (err) => {
+          document.getElementById("locationResult").innerText = "Location access denied or failed.";
+        },
+        { enableHighAccuracy: true, timeout: 5000 }
+      );
+    }
+
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave? Your form data may not be saved.";
+    };
+
+    function submitForm(e) {
+      e.preventDefault();
+      showConfirmation();
+    }
+  </script>
+</body>
+</html>
